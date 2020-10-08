@@ -26,3 +26,6 @@ ipch/
 *.opensdf
 *.sdf
 *.cachefile
+
+/dependences/SDL2/
+/dependences/SDL2_image-2.0.1/
