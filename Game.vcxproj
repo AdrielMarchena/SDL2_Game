@@ -19,20 +19,20 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\Colisor.cpp" />
+    <ClCompile Include="src\Engine\Colisor.cpp" />
     <ClCompile Include="src\LessEntity.cpp" />
-    <ClCompile Include="src\Keyboard.cpp" />
+    <ClCompile Include="src\Engine\Keyboard.cpp" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
-    <ClCompile Include="src\Game.cpp" />
+    <ClCompile Include="src\Engine\Game.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\Colisor.h" />
-    <ClInclude Include="src\GlobalDefs.h" />
+    <ClInclude Include="src\Engine\Colisor.h" />
+    <ClInclude Include="src\Engine\GlobalDefs.h" />
     <ClInclude Include="src\LessEntity.h" />
-    <ClInclude Include="src\Keyboard.h" />
+    <ClInclude Include="src\Engine\Keyboard.h" />
     <ClInclude Include="src\Player.h" />
-    <ClInclude Include="src\Game.h" />
+    <ClInclude Include="src\Engine\Game.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

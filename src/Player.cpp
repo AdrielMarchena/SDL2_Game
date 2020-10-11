@@ -1,6 +1,4 @@
 #include "Player.h"
-#include "Keyboard.h"
-#include "Game.h"
 
 Player::Player(SDL_Renderer* renderer)
 {
@@ -37,9 +35,9 @@ void Player::update()
 {
 	
 	movementLogic();
-	if(this->dY < terminalVelocity)
-		this->dY += GLOBAL_GRAVITY_VALUE;
-	this->PlayerBox.y += this->dY * Game::frameTime;
+	//if(this->dY < terminalVelocity)
+		//this->dY += GLOBAL_GRAVITY_VALUE;
+	//this->PlayerBox.y += this->dY;
 }
 
 void Player::draw()
@@ -51,21 +49,26 @@ void Player::draw()
 	}
 }
 
-void Player::bindKeyboard(Keyboard* keyboard)
+void Player::bindKeyboard(Engine::Keyboard* keyboard)
 {
 	this->keyboard = keyboard;
 }
 
+void Player::bindRenderer(SDL_Renderer* renderer)
+{
+	if(renderer != nullptr)
+		this->renderer = renderer;
+}
+
 SDL_Rect& Player::boxInfo()
 {
-	if(PlayerBox.y + PlayerBox.h >= 600){ PlayerBox.y = 600 - PlayerBox.h; }
 	return PlayerBox;
 }
 
-void Player::colided(Colisions::InterfaceToColide* cause)
+void Player::colided(Engine::InterfaceToColide* cause)
 {
 	SDL_Rect& cBox = cause->boxInfo();
-	if (cause->type == Colisions::Type::GROUND) {
+	if (cause->type == Engine::TypeColision::GROUND) {
 		//Working
 		if (PlayerBox.y + PlayerBox.h > cBox.y) {
 			PlayerBox.y = cBox.y - PlayerBox.h;
@@ -73,7 +76,7 @@ void Player::colided(Colisions::InterfaceToColide* cause)
 			isJumping = false;
 		}
 	}
-	if (cause->type == Colisions::Type::WALL) {
+	if (cause->type == Engine::TypeColision::WALL) {
 		//Working
 		if (PlayerBox.y + PlayerBox.h > cBox.y) {
 			PlayerBox.x = cBox.x - PlayerBox.w;
@@ -81,7 +84,7 @@ void Player::colided(Colisions::InterfaceToColide* cause)
 	}
 }
 
-void Player::bindTypeColision(Colisions::Type type)
+void Player::bindTypeColision(Engine::TypeColision type)
 {
 	this->type = type;
 }
@@ -119,16 +122,24 @@ inline void Player::movementLogic()
 			PlayerBox.x -= dX;
 	}
 
-	keyboard->clicked(keyboard->ky::ARROW_UP, [&]()
+	if (keyboard->isPress(keyboard->ky::ARROW_UP)) {
+		if (PlayerBox.y > 0)
+			this->PlayerBox.y--;
+		//PlayerBox.y += dY;
+	}
+
+	/*keyboard->clicked(keyboard->ky::ARROW_UP, [&]()
 	{
-		//if (PlayerBox.y > 0 && !isJumping) {
-			this->dY -= this->forceJump * Game::frameTime;
+		//this->PlayerBox.y--;
+		if (PlayerBox.y > 0 && !isJumping) {
+			this->dY -= this->forceJump;
 			isJumping = true;
-		//}
-	});
+		}
+	});*/
 
 	if (keyboard->isPress(keyboard->ky::ARROW_DOWN)) {
 		if (PlayerBox.y + PlayerBox.h < GLOBAL_SCREEN_H)
-			PlayerBox.y += dY;
+			this->PlayerBox.y++;
+			//PlayerBox.y += dY;
 	}
 }

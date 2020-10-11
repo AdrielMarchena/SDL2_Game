@@ -1,9 +1,9 @@
 #include <iostream>
-#include "GlobalDefs.h"
-#include "Game.h"
+#include "Engine/GlobalDefs.h"
+#include "Engine/Game.h"
+#include "Engine/Colisor.h"
 #include "Player.h"
 #include "LessEntity.h"
-#include "Colisor.h"
 #include <random>
 
 bool ColisionGround(const SDL_Rect& sub, const SDL_Rect& other) {
@@ -33,6 +33,7 @@ bool ColisionWall(const SDL_Rect& sub, const SDL_Rect& other) {
 
 int main(int argc, char* argv[])
 {
+    using namespace Engine;
     //Create keyboard instance
     Keyboard keyboard;
 
@@ -42,7 +43,7 @@ int main(int argc, char* argv[])
     game.bindKeyboard(&keyboard);
     
     //create a colisor instance
-    Colisions::Colisor colisionPlayerGround;
+    Colisor colisionPlayerGround;
     //Set the colisor mode to First to all mode
     colisionPlayerGround.setModeToColide(COLISOR_FIRST_TO_ALL_MODE_A);
 
@@ -51,7 +52,7 @@ int main(int argc, char* argv[])
 
     //Create a player instance
     Player player(game.renderer);
-    player.bindTypeColision(Colisions::Type::PLAYER);
+    player.bindTypeColision(TypeColision::PLAYER);
     //Bind a colision to the player
     //The player need to be the first 
     colisionPlayerGround.pushNewItem(&player);
@@ -77,43 +78,36 @@ int main(int argc, char* argv[])
         ground[i].objBox.y -= std::rand() % 10;
         game.PushIntoArrayDraw(&ground[i]);
         colisionPlayerGround.pushNewItem(&ground[i]);
-        ground[i].bindTypeColision(Colisions::Type::GROUND);
+        ground[i].bindTypeColision(TypeColision::GROUND);
         positionX += ground[i].boxInfo().w;
 
     }
     
     //Colision for walls
-    Colisions::Colisor colisionPlayerWall;
+    Colisor colisionPlayerWall;
     colisionPlayerWall.setModeToColide(COLISOR_FIRST_TO_ALL_MODE_A);
     colisionPlayerWall.setMethodToColide(ColisionWall);
     colisionPlayerWall.pushNewItem(&player);
 
+    
     //Create some walls
-    const unsigned short lWall = 15;
+    const unsigned short lWall = 1;
     LessEntity wall[lWall];
     positionX = 0;
     for (int i = 0; i < lWall; i++) {
 
         wall[i] = LessEntity(game.renderer, "assets/wall.png");
-        wall[i].objBox.x = GLOBAL_SCREEN_W - wall[i].objBox.w;
-        wall[i].objBox.y = positionX;
+        wall[i].objBox.x = GLOBAL_SCREEN_W / 2; //- wall[i].objBox.w;
+        wall[i].objBox.y = GLOBAL_SCREEN_H / 2;  //positionX;
         game.PushIntoArrayDraw(&wall[i]);
         colisionPlayerWall.pushNewItem(&wall[i]);
-        wall[i].bindTypeColision(Colisions::Type::WALL);
+        wall[i].bindTypeColision(TypeColision::WALL);
         positionX += wall[i].objBox.h;
     }
 
 
     //Push the player into the game loop
     game.PushIntoArrayDrawUpdate(&player);
-
-    /*const unsigned short lWall = 15;
-    LessEntity wall[lWall];
-    int positionY = 0;
-    //Create a Wall in right size
-    for (int i = 0; i < lWall; i++) {
-
-    }*/
 
     game.PushColisor(&colisionPlayerGround);
     game.PushColisor(&colisionPlayerWall);

@@ -1,8 +1,10 @@
 #pragma once
-#include "Game.h"
-#include "Colisor.h"
-#include "GlobalDefs.h"
-class Player : public interfaceDrawUpdate, public Colisions::InterfaceToColide
+#include "Engine/Game.h"
+#include "Engine/Colisor.h"
+#include "Engine/GlobalDefs.h"
+#include "Engine/Keyboard.h"
+
+class Player : public Engine::interfaceDrawUpdate, public Engine::InterfaceToColide
 {
 public:
 	float dX, dY;
@@ -11,12 +13,12 @@ public:
 	bool isJumping;
 	float xPosition;
 	float yPosition;
-public:
+private:
 	SDL_Renderer* renderer;
 	SDL_Texture* playerTexture;
 	SDL_Rect srcR, PlayerBox;
 	SDL_Surface* playerSurface;
-	Keyboard* keyboard;
+	Engine::Keyboard* keyboard;
 
 public:
 	
@@ -27,13 +29,15 @@ public:
 	void update();
 	void draw();
 	
-	void bindKeyboard(Keyboard* keyboard);
+	void bindKeyboard(Engine::Keyboard* keyboard);
+	void bindRenderer(SDL_Renderer* renderer);
 	//From InterfaceToColide
 	SDL_Rect& boxInfo();
 	void colided(InterfaceToColide* cause);
-	void bindTypeColision(Colisions::Type type);
+	void bindTypeColision(Engine::TypeColision type);
 private:
 	inline void movementLogic();
+	inline bool min(int a,int b);
 
 };
 

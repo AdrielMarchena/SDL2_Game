@@ -47,7 +47,7 @@ void LessEntity::draw()
 	}
 }
 
-void LessEntity::bindTypeColision(Colisions::Type type)
+void LessEntity::bindTypeColision(Engine::TypeColision type)
 {
 	this->type = type;
 }
