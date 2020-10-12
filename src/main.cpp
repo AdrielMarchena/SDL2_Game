@@ -65,7 +65,6 @@ int main(int argc, char* argv[])
     //Set Player force jump
     player.forceJump = 20;
 
-
     //bind a function to the colisor
     colisionPlayerGround.setMethodToColide(ColisionGround);
 

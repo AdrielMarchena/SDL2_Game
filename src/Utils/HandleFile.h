@@ -19,6 +19,7 @@ public:
 	const std::string& getPathFile();
 
 	std::stringstream read();
+	bool write(const std::string& line);
 
 private:
 	std::string pathFile;

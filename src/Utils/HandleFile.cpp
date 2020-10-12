@@ -39,6 +39,20 @@ namespace Utils
 		stream.close();
 		return stringReturn;
 	}
+	bool HandleFile::write(const std::string& line)
+	{
+		std::ofstream stream(pathFile, std::ios::app);
+		if (stream.is_open()) {
+			stream << line;
+			stream.close();
+			return true;
+		}
+		else {
+			stream << "";
+			stream.close();
+			return false;
+		}
+	}
 }
 
 
