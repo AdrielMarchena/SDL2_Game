@@ -7,25 +7,13 @@
 #include <random>
 #include "Utils/HandleFile.h"
 
-bool ColisionGround(const SDL_Rect& sub, const SDL_Rect& other) {
+bool ColisionRect(const SDL_Rect& sub, const SDL_Rect& other) {
 
     if ((sub.x + sub.w) > other.x &&
         sub.x < (other.x + other.w) &&
         (sub.y + sub.h) > other.y &&
         sub.y < (other.y + other.h))
     {
-        return true;
-    }
-
-    return false;
-}
-
-bool ColisionWall(const SDL_Rect& sub, const SDL_Rect& other) {
-
-    if ((sub.x + sub.w) > other.x &&
-        sub.x < (other.x + other.w) &&
-        (sub.y + sub.h) > other.y &&
-        sub.y < (other.y + other.h)) {
         return true;
     }
 
@@ -66,7 +54,7 @@ int main(int argc, char* argv[])
     player.forceJump = 20;
 
     //bind a function to the colisor
-    colisionPlayerGround.setMethodToColide(ColisionGround);
+    colisionPlayerGround.setMethodToColide(ColisionRect);
 
     //Create some grounds
     const unsigned short lGround = 15;
@@ -88,7 +76,7 @@ int main(int argc, char* argv[])
     //Colision for walls
     Colisor colisionPlayerWall;
     colisionPlayerWall.setModeToColide(COLISOR_FIRST_TO_ALL_MODE_A);
-    colisionPlayerWall.setMethodToColide(ColisionWall);
+    colisionPlayerWall.setMethodToColide(ColisionRect);
     colisionPlayerWall.pushNewItem(&player);
 
     

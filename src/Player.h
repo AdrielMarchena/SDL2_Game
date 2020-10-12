@@ -4,7 +4,6 @@
 #include "Engine/GlobalDefs.h"
 #include "Engine/Keyboard.h"
 
-
 class Player : public Engine::interfaceDrawUpdate, public Engine::InterfaceToColide
 {
 public:

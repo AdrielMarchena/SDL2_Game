@@ -86,8 +86,6 @@ namespace Engine
 
 	void Game::initLoop()
 	{
-		//short iterations = 0;
-		//static unsigned long long cicleI = 0;
 		const short FPS = 60;
 		const int frameDelay = 1000 / FPS;
 
@@ -103,21 +101,14 @@ namespace Engine
 			if (frameDelay > frameTime) {
 				SDL_Delay(frameDelay - frameTime);
 			}
-			/*if (iterations >= SHRT_MAX) {
-				iterations = 0;
-				cicleI++;
-			}
-			iterations++;*/
+			
 		}
-		//std::cout << "actual iteractions: " << iterations << std::endl << "Cicles: " << cicleI << std::endl;
 		this->clean();
 	}
 
 	void Game::stopLoop()
 	{
-
 		this->isRunning = false;
-
 	}
 
 	void Game::bindKeyboard(Keyboard* keyboard)

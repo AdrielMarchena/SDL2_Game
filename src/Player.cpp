@@ -15,7 +15,6 @@ Player::Player(SDL_Renderer* renderer)
 	this->renderer = renderer;
 	const char* pathImage = "assets/player.png";
 	
-
 	playerSurface = IMG_Load(pathImage);
 	playerTexture = SDL_CreateTextureFromSurface(this->renderer, playerSurface);
 	if (playerTexture == NULL) {
@@ -33,11 +32,10 @@ Player::~Player()
 
 void Player::update()
 {
-	
 	movementLogic();
-	//if(this->dY < terminalVelocity)
-		//this->dY += GLOBAL_GRAVITY_VALUE;
-	//this->PlayerBox.y += this->dY;
+	if(this->dY < terminalVelocity)
+		this->dY += GLOBAL_GRAVITY_VALUE;
+	this->PlayerBox.y += this->dY;
 }
 
 void Player::draw()
@@ -129,24 +127,16 @@ inline void Player::movementLogic()
 			PlayerBox.x -= dX;
 	}
 
-	if (keyboard->isPress(keyboard->ky::ARROW_UP)) {
-		if (PlayerBox.y > 0)
-			this->PlayerBox.y--;
-		//PlayerBox.y += dY;
-	}
-
-	/*keyboard->clicked(keyboard->ky::ARROW_UP, [&]()
+	keyboard->clicked(keyboard->ky::ARROW_UP, [&]()
 	{
-		//this->PlayerBox.y--;
 		if (PlayerBox.y > 0 && !isJumping) {
 			this->dY -= this->forceJump;
 			isJumping = true;
 		}
-	});*/
+	});
 
-	if (keyboard->isPress(keyboard->ky::ARROW_DOWN)) {
+	/*if (keyboard->isPress(keyboard->ky::ARROW_DOWN)) {
 		if (PlayerBox.y + PlayerBox.h < GLOBAL_SCREEN_H)
 			this->PlayerBox.y++;
-			//PlayerBox.y += dY;
-	}
+	}*/
 }

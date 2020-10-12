@@ -2,6 +2,7 @@
 #include "Engine/Game.h"
 #include "Engine/GlobalDefs.h"
 #include "Engine/Colisor.h"
+
 class LessEntity 
 	: public Engine::interfaceDraw, public Engine::InterfaceToColide
 {

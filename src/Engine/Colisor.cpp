@@ -35,11 +35,9 @@ namespace Engine {
 
 	inline void Colisor::processFirtToAll() {
 		for (size_t i = 0; i < objToColide.size(); i++) {
-			//for (size_t j = 0; j < objToColide.size(); j++) {
 			if (i == firstMember)
 				continue;
 			testColision(objToColide[0], objToColide[i]);
-			//}
 		}
 	}
 	/*
@@ -48,11 +46,9 @@ namespace Engine {
 	inline void Colisor::processFirstToAll_A()
 	{
 		for (size_t i = 0; i < objToColide.size(); i++) {
-			//for (size_t j = 0; j < objToColide.size(); j++) {
 			if (i == firstMember)
 				continue;
 			testColision(objToColide[0], objToColide[i]);
-			//}
 		}
 	}
 
@@ -63,27 +59,12 @@ namespace Engine {
 
 	void Colisor::setMethodToColide( std::function<bool(const SDL_Rect&, const SDL_Rect&)> function )
 	{
-
 		methodToColide = function;
-
 	}
 
 	void Colisor::setModeToColide(const unsigned int& mode)
 	{
 		this->mode = mode;
-	}
-	/*
-		Not tested
-	*/
-	void Colisor::setFirstMember(InterfaceToColide* obj)
-	{
-		for (int i = 0; i < objToColide.size(); i++) {
-			if (obj == objToColide[i])
-			{
-				firstMember = i;
-			}
-		}
-
 	}
 
 	SideColided Colisor::calcRecColision(SDL_Rect* a, SDL_Rect* b)
@@ -131,9 +112,7 @@ namespace Engine {
 			other->colided(subject);
 			return true;
 		}
-	
 		return false;
-
 	}
 
 	inline bool Colisor::testColisionA(InterfaceToColide* subject, InterfaceToColide* other)
@@ -146,7 +125,4 @@ namespace Engine {
 		}
 		return false;
 	}
-
-
-
 }

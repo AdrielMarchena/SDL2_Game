@@ -24,6 +24,7 @@ namespace Utils
 	{
 		return pathFile;
 	}
+
 	std::stringstream HandleFile::read()
 	{
 		std::ifstream stream(pathFile);
@@ -39,6 +40,7 @@ namespace Utils
 		stream.close();
 		return stringReturn;
 	}
+
 	bool HandleFile::write(const std::string& line)
 	{
 		std::ofstream stream(pathFile, std::ios::app);

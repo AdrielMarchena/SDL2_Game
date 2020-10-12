@@ -7,24 +7,24 @@
 namespace Utils
 {
 
-class HandleFile	
-{
-public:
-	HandleFile(const std::string& pathfile);
-	HandleFile();
-	~HandleFile();
+	class HandleFile	
+	{
+	public:
+		HandleFile(const std::string& pathfile);
+		HandleFile();
+		~HandleFile();
 	
 
-	void setPathFile(const std::string& pathfile);
-	const std::string& getPathFile();
+		void setPathFile(const std::string& pathfile);
+		const std::string& getPathFile();
 
-	std::stringstream read();
-	bool write(const std::string& line);
+		std::stringstream read();
+		bool write(const std::string& line);
 
-private:
-	std::string pathFile;
+	private:
+		std::string pathFile;
 
-};
+	};
 
 }
 

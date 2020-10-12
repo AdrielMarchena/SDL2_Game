@@ -1,6 +1,5 @@
 #pragma once
 
-
 namespace Engine
 {
 	#define GLOBAL_SCREEN_W 800

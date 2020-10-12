@@ -12,6 +12,7 @@ namespace Engine
 
 		enum class SideColided
 		{
+			INVALID = -1,
 			BOTTOM,
 			LEFT,
 			RIGHT,
@@ -39,16 +40,13 @@ namespace Engine
 			int firstMember = 0;
 			std::vector<InterfaceToColide*> objToColide;
 
-
 			Colisor();
 			~Colisor();
-
 
 			void processColisions();
 			void pushNewItem(InterfaceToColide* obj);
 			void setMethodToColide(std::function<bool(const SDL_Rect&, const SDL_Rect&)>);
 			void setModeToColide(const unsigned int& mode);
-			void setFirstMember(InterfaceToColide* obj);
 			static SideColided calcRecColision(SDL_Rect* a, SDL_Rect* b);
 		private:
 			unsigned int mode = 0;

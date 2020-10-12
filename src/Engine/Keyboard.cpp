@@ -11,26 +11,25 @@ namespace Engine
 		clickedFunction.reserve(qtdKeys); clickedFunction.assign(qtdKeys, []()
 		{
 		});
-
 	}
 	Keyboard::~Keyboard() {}
 
 	void Keyboard::handleInputs() {
 		int key = events.key.keysym.sym;
 		switch (events.type) {
-			//If a key is pressed, that key is associated with true
-		case SDL_KEYDOWN:
-			pressedKeys[keyAssociated(key)] = true;
 
-			if (clickedFunction[keyAssociated(key)] && !clickedKeys[keyAssociated(key)]) {
-				clickedKeys[keyAssociated(key)] = true;
-				clickedFunction[keyAssociated(key)]();
-			}
+			case SDL_KEYDOWN:
+				pressedKeys[keyAssociated(key)] = true;
+
+				if (clickedFunction[keyAssociated(key)] && !clickedKeys[keyAssociated(key)]) {
+					clickedKeys[keyAssociated(key)] = true;
+					clickedFunction[keyAssociated(key)]();
+				}
 			break;
 
-		case SDL_KEYUP:
-			pressedKeys[keyAssociated(key)] = false;
-			clickedKeys[keyAssociated(key)] = false;
+			case SDL_KEYUP:
+				pressedKeys[keyAssociated(key)] = false;
+				clickedKeys[keyAssociated(key)] = false;
 			break;
 		}
 	}
@@ -75,5 +74,4 @@ namespace Engine
 
 		}
 	}
-
 }
