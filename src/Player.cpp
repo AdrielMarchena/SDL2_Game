@@ -67,20 +67,27 @@ SDL_Rect& Player::boxInfo()
 
 void Player::colided(Engine::InterfaceToColide* cause)
 {
+
+	Engine::SideColided side;
 	SDL_Rect& cBox = cause->boxInfo();
-	if (cause->type == Engine::TypeColision::GROUND) {
-		//Working
-		if (PlayerBox.y + PlayerBox.h > cBox.y) {
-			PlayerBox.y = cBox.y - PlayerBox.h;
-			this->dY = 0;
-			isJumping = false;
-		}
-	}
-	if (cause->type == Engine::TypeColision::WALL) {
-		//Working
-		if (PlayerBox.y + PlayerBox.h > cBox.y) {
-			PlayerBox.x = cBox.x - PlayerBox.w;
-		}
+	
+	if (cause->type == Engine::TypeColision::WALL || cause->type == Engine::TypeColision::GROUND) {
+		side = Engine::Colisor::calcRecColision(&PlayerBox, &cBox);
+		//Bottom
+		if (side == Engine::SideColided::BOTTOM)
+			PlayerBox.y = cBox.y + cBox.h;
+
+		//Left
+		if (side == Engine::SideColided::LEFT)
+			PlayerBox.x = cBox.x - PlayerBox.h;
+
+		//Right
+		if (side == Engine::SideColided::RIGHT)
+			PlayerBox.x = cBox.x + cBox.w;
+
+		//Top
+		if (side == Engine::SideColided::TOP)
+			PlayerBox.y = cBox.y - cBox.h;
 	}
 }
 

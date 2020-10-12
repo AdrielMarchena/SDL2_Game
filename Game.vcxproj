@@ -36,9 +36,6 @@
     <ClInclude Include="src\Engine\Game.h" />
     <ClInclude Include="src\Utils\HandleFile.h" />
   </ItemGroup>
-  <ItemGroup>
-    <Text Include="src\testFile.txt" />
-  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>

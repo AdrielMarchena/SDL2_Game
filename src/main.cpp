@@ -107,7 +107,6 @@ int main(int argc, char* argv[])
         positionX += wall[i].objBox.h;
     }
 
-
     //Push the player into the game loop
     game.PushIntoArrayDrawUpdate(&player);
 

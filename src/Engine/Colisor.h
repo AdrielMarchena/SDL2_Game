@@ -10,6 +10,13 @@ namespace Engine
 #define COLISOR_FIRST_TO_ALL_MODE 2
 #define COLISOR_FIRST_TO_ALL_MODE_A 3
 
+		enum class SideColided
+		{
+			BOTTOM,
+			LEFT,
+			RIGHT,
+			TOP
+		};
 
 		enum class TypeColision {
 			GROUND,
@@ -42,6 +49,7 @@ namespace Engine
 			void setMethodToColide(std::function<bool(const SDL_Rect&, const SDL_Rect&)>);
 			void setModeToColide(const unsigned int& mode);
 			void setFirstMember(InterfaceToColide* obj);
+			static SideColided calcRecColision(SDL_Rect* a, SDL_Rect* b);
 		private:
 			unsigned int mode = 0;
 

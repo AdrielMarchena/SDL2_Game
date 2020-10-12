@@ -86,6 +86,43 @@ namespace Engine {
 
 	}
 
+	SideColided Colisor::calcRecColision(SDL_Rect* a, SDL_Rect* b)
+	{
+		float dx = ((a->x + a->w) / 2) - ((b->x + b->w) / 2);
+		float dy = ((a->y + a->h) / 2) - ((b->y + b->h) / 2);
+		float wid = (a->w + b->w) / 2;
+		float hei = (a->h + b->h) / 2;
+		float crossW = wid * dy;
+		float crossH = hei * dx;
+
+		if (abs(dx) <= wid && abs(dy) <= hei)
+			if (crossW > crossH) {
+				if (crossW > (-crossH))
+				{
+					//Bottom
+					return SideColided::BOTTOM;
+				}
+				else
+				{
+					//Left
+					return SideColided::LEFT;
+				}
+			}
+			else
+			{
+				if (crossW > -(crossH))
+				{
+					//Right
+					return SideColided::RIGHT;
+				}
+				else
+				{
+					//Top
+					return SideColided::TOP;
+				}
+			}
+	}
+
 	inline bool Colisor::testColision(InterfaceToColide* subject, InterfaceToColide* other) {
 		SDL_Rect& subBox = subject->boxInfo(), otherBox = other->boxInfo();
 

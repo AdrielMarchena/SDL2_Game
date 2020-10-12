@@ -4,6 +4,7 @@
 #include "Engine/GlobalDefs.h"
 #include "Engine/Keyboard.h"
 
+
 class Player : public Engine::interfaceDrawUpdate, public Engine::InterfaceToColide
 {
 public:
@@ -37,8 +38,6 @@ public:
 	void bindTypeColision(Engine::TypeColision type);
 private:
 	inline void movementLogic();
-	inline bool min(int a,int b);
-
 };
 
 
