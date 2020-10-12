@@ -33,6 +33,9 @@
     <ClCompile Include="src\Engine\Keyboard.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\Utils\HandleFile.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Player.h">
@@ -53,5 +56,11 @@
     <ClInclude Include="src\Engine\Keyboard.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="src\Utils\HandleFile.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\testFile.txt" />
   </ItemGroup>
 </Project>

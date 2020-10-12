@@ -25,6 +25,7 @@
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\Player.cpp" />
     <ClCompile Include="src\Engine\Game.cpp" />
+    <ClCompile Include="src\Utils\HandleFile.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\Engine\Colisor.h" />
@@ -33,6 +34,10 @@
     <ClInclude Include="src\Engine\Keyboard.h" />
     <ClInclude Include="src\Player.h" />
     <ClInclude Include="src\Engine\Game.h" />
+    <ClInclude Include="src\Utils\HandleFile.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="src\testFile.txt" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>

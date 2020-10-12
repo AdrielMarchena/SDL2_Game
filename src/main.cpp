@@ -5,6 +5,7 @@
 #include "Player.h"
 #include "LessEntity.h"
 #include <random>
+#include "Utils/HandleFile.h"
 
 bool ColisionGround(const SDL_Rect& sub, const SDL_Rect& other) {
 
@@ -34,6 +35,8 @@ bool ColisionWall(const SDL_Rect& sub, const SDL_Rect& other) {
 int main(int argc, char* argv[])
 {
     using namespace Engine;
+    using namespace Utils;
+    
     //Create keyboard instance
     Keyboard keyboard;
 
