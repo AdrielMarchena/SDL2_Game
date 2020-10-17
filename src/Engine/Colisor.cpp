@@ -62,7 +62,7 @@ namespace Engine {
 		methodToColide = function;
 	}
 
-	void Colisor::setModeToColide(const unsigned int& mode)
+	void Colisor::setModeToColide(unsigned int mode)
 	{
 		this->mode = mode;
 	}

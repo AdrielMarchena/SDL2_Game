@@ -7,20 +7,11 @@
 #include "Keyboard.h"
 #include "Colisor.h"
 
+#include "InterfaceDrawUpdate.h"
+#include "InterfaceDraw.h"
+
 namespace Engine
 {
-	class interfaceDrawUpdate {
-	public:
-		virtual void update() = 0;
-		virtual void draw() = 0;
-
-	};
-
-	class interfaceDraw {
-	public:
-		virtual void draw() = 0;
-	};
-
 	class Game {
 	public:
 		SDL_Event* event;

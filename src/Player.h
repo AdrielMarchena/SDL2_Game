@@ -1,8 +1,10 @@
 #pragma once
-#include "Engine/Game.h"
+#include "SDL_image.h"
 #include "Engine/Colisor.h"
 #include "Engine/GlobalDefs.h"
 #include "Engine/Keyboard.h"
+#include "Engine/InterfaceDrawUpdate.h"
+#include "Engine/InterfaceToColide.h"
 
 class Player : public Engine::interfaceDrawUpdate, public Engine::InterfaceToColide
 {
