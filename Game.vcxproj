@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\Engine\Sprite.cpp" />
     <ClCompile Include="src\Engine\Colisor.cpp" />
     <ClCompile Include="src\LessEntity.cpp" />
     <ClCompile Include="src\Engine\Keyboard.cpp" />
@@ -28,6 +29,10 @@
     <ClCompile Include="src\Utils\HandleFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\InterfaceDraw.h" />
+    <ClInclude Include="src\Engine\InterfaceDrawUpdate.h" />
+    <ClInclude Include="src\Engine\InterfaceToColide.h" />
+    <ClInclude Include="src\Engine\Sprite.h" />
     <ClInclude Include="src\Engine\Colisor.h" />
     <ClInclude Include="src\Engine\GlobalDefs.h" />
     <ClInclude Include="src\LessEntity.h" />

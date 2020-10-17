@@ -1,46 +1,44 @@
 #include "Player.h"
 
-Player::Player(SDL_Renderer* renderer)
+Player::Player(SDL_Renderer* renderer,const char* path)
+	: renderer(renderer)
 {
 	xPosition = GLOBAL_SCREEN_W / 2;
 	yPosition = GLOBAL_SCREEN_H / 2;
 
 	dX = 1.0f;
 	dY = 0.0f;
-	PlayerBox.w = 64; 
-	PlayerBox.h = 64;
-	PlayerBox.x = (int)xPosition;
-	PlayerBox.y = (int)yPosition;
-
-	this->renderer = renderer;
-	const char* pathImage = "assets/player.png";
 	
-	playerSurface = IMG_Load(pathImage);
-	playerTexture = SDL_CreateTextureFromSurface(this->renderer, playerSurface);
-	if (playerTexture == NULL) {
-		std::cout << "Image < " << pathImage << " > Not Loaded!" << std::endl << "ERROR: " << SDL_GetError() << std::endl;
-		return;
+	this->sprite = new Engine::Sprite(renderer, path);
+	if (sprite)
+	{
+		sprite->box.w = 64;
+		sprite->box.h = 64;
+		sprite->box.x = (int)xPosition;
+		sprite->box.y = (int)yPosition;
 	}
-	std::cout << "Image < " << pathImage << " > Loaded!" << std::endl;
-	SDL_FreeSurface(playerSurface);
+	else {
+		std::cout << "Failed while trying to create player sprite" << std::endl;
+	}
 }
 
 Player::~Player()
 {
-	SDL_DestroyTexture(playerTexture);
+	//delete(sprite);
 }
 
 void Player::update()
 {
-	movementLogic();
-	if(this->dY < terminalVelocity)
+	if (this->dY <= terminalVelocity)
 		this->dY += GLOBAL_GRAVITY_VALUE;
-	this->PlayerBox.y += this->dY;
+	this->sprite->box.y += this->dY;
+	movementLogic();
+	
 }
 
 void Player::draw()
 {
-	if(SDL_RenderCopy(this->renderer, playerTexture, NULL, &PlayerBox))
+	if(SDL_RenderCopy(this->renderer, sprite->texture, NULL, &sprite->box))
 	{
 		std::cout << "Failed rendering Player SDL_ERROR: " <<SDL_GetError() << std::endl;
 		exit(0);
@@ -60,32 +58,31 @@ void Player::bindRenderer(SDL_Renderer* renderer)
 
 SDL_Rect& Player::boxInfo()
 {
-	return PlayerBox;
+	return sprite->box;
 }
 
 void Player::colided(Engine::InterfaceToColide* cause)
 {
-
 	Engine::SideColided side;
 	SDL_Rect& cBox = cause->boxInfo();
 	
 	if (cause->type == Engine::TypeColision::WALL || cause->type == Engine::TypeColision::GROUND) {
-		side = Engine::Colisor::calcRecColision(&PlayerBox, &cBox);
+		side = Engine::Colisor::calcRecColision(&sprite->box, &cBox);
 		//Bottom
 		if (side == Engine::SideColided::BOTTOM)
-			PlayerBox.y = cBox.y + cBox.h;
+			sprite->box.y = cBox.y + cBox.h;
 
 		//Left
 		if (side == Engine::SideColided::LEFT)
-			PlayerBox.x = cBox.x - PlayerBox.h;
+			sprite->box.x = cBox.x - sprite->box.h;
 
 		//Right
 		if (side == Engine::SideColided::RIGHT)
-			PlayerBox.x = cBox.x + cBox.w;
+			sprite->box.x = cBox.x + cBox.w;
 
 		//Top
 		if (side == Engine::SideColided::TOP)
-			PlayerBox.y = cBox.y - cBox.h;
+			sprite->box.y = cBox.y - cBox.h;
 	}
 }
 
@@ -98,12 +95,12 @@ void Player::bindTypeColision(Engine::TypeColision type)
 inline void Player::movementLogic()
 {
 
-	if (PlayerBox.y + PlayerBox.h > GLOBAL_SCREEN_H)
+	if (sprite->box.y + sprite->box.h > GLOBAL_SCREEN_H)
 		this->dY = 0;
 
 	keyboard->clicked(keyboard->ky::SPACEBAR, [&]()
 	{
-		this->PlayerBox.x--;
+		this->sprite->box.x--;
 	});
 
 	keyboard->clicked(keyboard->ky::PLUS_KEY, [&]()
@@ -119,17 +116,17 @@ inline void Player::movementLogic()
 	});
 
 	if (keyboard->isPress(keyboard->ky::ARROW_RIGHT)) {
-		if (PlayerBox.x + PlayerBox.w < GLOBAL_SCREEN_W)
-			PlayerBox.x += dX;
+		if (sprite->box.x + sprite->box.w < GLOBAL_SCREEN_W)
+			sprite->box.x += dX;
 	}
 	if (keyboard->isPress(keyboard->ky::ARROW_LEFT)) {
-		if (PlayerBox.x > 0)
-			PlayerBox.x -= dX;
+		if (sprite->box.x > 0)
+			sprite->box.x -= dX;
 	}
 
 	keyboard->clicked(keyboard->ky::ARROW_UP, [&]()
 	{
-		if (PlayerBox.y > 0 && !isJumping) {
+		if (sprite->box.y > 0 && !isJumping) {
 			this->dY -= this->forceJump;
 			isJumping = true;
 		}

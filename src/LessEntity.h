@@ -1,7 +1,7 @@
 #pragma once
 #include "Engine/Game.h"
 #include "Engine/GlobalDefs.h"
-
+#include "Engine/Sprite.h"
 #include "Engine/InterfaceDraw.h"
 #include "Engine/InterfaceToColide.h"
 
@@ -10,9 +10,7 @@ class LessEntity
 {
 public:
 	SDL_Renderer* renderer;
-	SDL_Texture* objTexture;
-	SDL_Rect objBox;
-	SDL_Surface* objSurface;
+	Engine::Sprite* sprite;
 	Engine::Keyboard* keyboard = nullptr;
 
 	LessEntity();

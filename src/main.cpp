@@ -42,7 +42,7 @@ int main(int argc, char* argv[])
     game.init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, GLOBAL_SCREEN_W, GLOBAL_SCREEN_H, false);
 
     //Create a player instance
-    Player player(game.renderer);
+    Player player(game.renderer,"assets/player.png");
     player.bindTypeColision(TypeColision::PLAYER);
     //Bind a colision to the player
     //The player need to be the first 
@@ -64,8 +64,8 @@ int main(int argc, char* argv[])
     for (int i = 0; i < lGround; i++) {
 
         ground[i] = LessEntity(game.renderer,"assets/ground.png");
-        ground[i].objBox.x = positionX;
-        ground[i].objBox.y -= std::rand() % 10;
+        ground[i].sprite->box.x = positionX;
+        //ground[i].sprite->box.y -= std::rand() % 10;
         game.PushIntoArrayDraw(&ground[i]);
         colisionPlayerGround.pushNewItem(&ground[i]);
         ground[i].bindTypeColision(TypeColision::GROUND);
@@ -79,7 +79,6 @@ int main(int argc, char* argv[])
     colisionPlayerWall.setMethodToColide(ColisionRect);
     colisionPlayerWall.pushNewItem(&player);
 
-    
     //Create some walls
     const unsigned short lWall = 1;
     LessEntity wall[lWall];
@@ -87,12 +86,12 @@ int main(int argc, char* argv[])
     for (int i = 0; i < lWall; i++) {
 
         wall[i] = LessEntity(game.renderer, "assets/wall.png");
-        wall[i].objBox.x = GLOBAL_SCREEN_W / 2; //- wall[i].objBox.w;
-        wall[i].objBox.y = GLOBAL_SCREEN_H / 2;  //positionX;
+        wall[i].sprite->box.x = GLOBAL_SCREEN_W / 2; //- wall[i].objBox.w;
+        wall[i].sprite->box.y = GLOBAL_SCREEN_H / 2;  //positionX;
         game.PushIntoArrayDraw(&wall[i]);
         colisionPlayerWall.pushNewItem(&wall[i]);
         wall[i].bindTypeColision(TypeColision::WALL);
-        positionX += wall[i].objBox.h;
+        positionX += wall[i].sprite->box.h;
     }
 
     //Push the player into the game loop

@@ -5,6 +5,7 @@
 #include "Engine/Keyboard.h"
 #include "Engine/InterfaceDrawUpdate.h"
 #include "Engine/InterfaceToColide.h"
+#include "Engine/Sprite.h"
 
 class Player : public Engine::interfaceDrawUpdate, public Engine::InterfaceToColide
 {
@@ -17,14 +18,12 @@ public:
 	float yPosition;
 private:
 	SDL_Renderer* renderer;
-	SDL_Texture* playerTexture;
-	SDL_Rect srcR, PlayerBox;
-	SDL_Surface* playerSurface;
 	Engine::Keyboard* keyboard;
+	Engine::Sprite* sprite;
 
 public:
 	
-	Player(SDL_Renderer* renderer);
+	Player(SDL_Renderer* renderer, const char* path);
 	~Player();
 
 	//From InterfaceToEngine
