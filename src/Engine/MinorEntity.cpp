@@ -54,6 +54,10 @@ namespace Engine
 	{
 		return sprite;
 	}
+	void MinorEntity::setGlobalConfig(GlobalConf* globalConfig)
+	{
+		this->globalConfig = globalConfig;
+	}
 }
 
 

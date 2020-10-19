@@ -1,11 +1,11 @@
 #pragma once
 #include "SDL_image.h"
 #include "Engine/Colisor.h"
-#include "Engine/GlobalDefs.h"
 #include "Engine/Keyboard.h"
 #include "Engine/Entity.h"
 #include "Engine/InterfaceToColide.h"
 #include "Engine/Sprite.h"
+
 
 class Player : public Engine::Entity
 {

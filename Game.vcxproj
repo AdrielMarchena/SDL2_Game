@@ -31,13 +31,13 @@
     <ClCompile Include="src\Utils\HandleFile.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\Engine\Global.h" />
     <ClInclude Include="src\Engine\MinorEntity.h" />
     <ClInclude Include="src\Engine\Entity.h" />
     <ClInclude Include="src\Engine\InterfaceToColide.h" />
     <ClInclude Include="src\Engine\Math.h" />
     <ClInclude Include="src\Engine\Sprite.h" />
     <ClInclude Include="src\Engine\Colisor.h" />
-    <ClInclude Include="src\Engine\GlobalDefs.h" />
     <ClInclude Include="src\LessEntity.h" />
     <ClInclude Include="src\Engine\Keyboard.h" />
     <ClInclude Include="src\Player.h" />

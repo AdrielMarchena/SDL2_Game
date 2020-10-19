@@ -2,12 +2,13 @@
 #include <SDL.h>
 #include "Sprite.h"
 #include "Math.h"
-#include "GlobalDefs.h"
+#include "Global.h"
 
 namespace Engine
 {
 	class MinorEntity {
 	protected:
+		GlobalConf* globalConfig;
 		Math::Vec2f pos;
 		SDL_Renderer* renderer;
 		Sprite* sprite;
@@ -24,5 +25,6 @@ namespace Engine
 		Math::Vec2f& getPos();
 		void setPos(Engine::Math::Vec2f pos);
 		Sprite* getSprite();
+		void setGlobalConfig(GlobalConf* globalConfig);
 	};
 }

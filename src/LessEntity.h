@@ -1,6 +1,5 @@
 #pragma once
 #include "Engine/Game.h"
-#include "Engine/GlobalDefs.h"
 #include "Engine/Sprite.h"
 #include "Engine/MinorEntity.h"
 #include "Engine/InterfaceToColide.h"

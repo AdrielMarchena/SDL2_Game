@@ -6,29 +6,30 @@
 #include <vector>
 #include "Keyboard.h"
 #include "Colisor.h"
-
-#include "Entity.h"
+#include "Global.h"
 #include "MinorEntity.h"
+#include "Entity.h"
 
 namespace Engine
 {
 	class Game {
-	public:
-		SDL_Event* event;
+	private:
+		bool isRunning;
+
+		GlobalConf GLOBAL_CONF;
 		SDL_Window* window;
 		std::vector<Entity*> objArrayDrawUpdate;
 		std::vector<MinorEntity*> objArrayDraw;
 		SDL_Renderer* renderer;
 		Keyboard* keyboard;
 		std::vector<Colisor*> c_Colisors;
-	private:
-		bool isRunning;
 
 	public:
 		Game();
 		~Game();
 
-		void init(const char* title, const int& xpos, const int& ypos, const int& width, const int& height, const bool& fullscrean);
+		Game(const char* title, int xpos, int ypos, int width, int height, bool fullscrean);
+
 		void handleEvents();
 		void update();
 		void render();
@@ -39,6 +40,11 @@ namespace Engine
 		void initLoop();
 		void stopLoop();
 		void bindKeyboard(Keyboard* keyboard);
+		void fullscreen(bool opc);
+		SDL_Window* getWindow();
+		SDL_Renderer* getRenderer();
+		Keyboard* getKeyboard();
+		GlobalConf* getGlobalConf();
 	};
 }
 

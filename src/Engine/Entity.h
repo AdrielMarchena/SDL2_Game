@@ -3,7 +3,6 @@
 #include "Keyboard.h"
 #include "Sprite.h"
 #include "Math.h"
-#include "GlobalDefs.h"
 #include "InterfaceToColide.h"
 #include "MinorEntity.h"
 

@@ -1,8 +1,9 @@
 #include "Player.h"
 
 Player::Player(Engine::Math::Vec2f pos,SDL_Renderer* renderer,const char* path)
-	: Entity(pos,renderer,path), forceJump(15)
+	: Entity(pos,renderer,path), forceJump(40)
 {
+	dX = 10;
 }
 
 Player::~Player()
@@ -12,8 +13,8 @@ Player::~Player()
 
 void Player::update()
 {
-	if (this->dY <= terminalVelocity && pos.y + sprite->box.h <= GLOBAL_SCREEN_H)
-		this->dY += GLOBAL_GRAVITY_VALUE;
+	if (this->dY <= terminalVelocity)
+		this->dY += globalConfig->gravity;
 	pos.y += this->dY;
 	movementLogic();
 	sprite->box.x = pos.x;
@@ -63,7 +64,7 @@ void Player::colided(Engine::InterfaceToColide* cause)
 //Private
 inline void Player::movementLogic()
 {
-	if (pos.y + sprite->box.h > GLOBAL_SCREEN_H)
+	if (pos.y + sprite->box.h > globalConfig->windowSize.H)
 		this->dY = 0;
 
 	keyboard->clicked(keyboard->ky::SPACEBAR, [&]()
@@ -84,7 +85,7 @@ inline void Player::movementLogic()
 	});
 
 	if (keyboard->isPress(keyboard->ky::ARROW_RIGHT)) {
-		if (pos.x + sprite->box.w < GLOBAL_SCREEN_W)
+		if (pos.x + sprite->box.w < globalConfig->windowSize.W)
 			pos.x += dX;
 	}
 	if (keyboard->isPress(keyboard->ky::ARROW_LEFT)) {
