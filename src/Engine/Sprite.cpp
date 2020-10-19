@@ -11,8 +11,12 @@ namespace Engine {
 			std::cout << "Image < " << path << " > Not Loaded!" << std::endl << "ERROR: " << SDL_GetError() << std::endl;
 			return;
 		}
+		srcR.w = surface->w;
+		srcR.h = surface->h;
 		std::cout << "Image < " << path << " > Loaded!" << std::endl;
 		SDL_FreeSurface(surface);
 	}
+
+	Sprite::~Sprite(){}
 
 }

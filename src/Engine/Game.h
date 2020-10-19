@@ -7,8 +7,8 @@
 #include "Keyboard.h"
 #include "Colisor.h"
 
-#include "InterfaceDrawUpdate.h"
-#include "InterfaceDraw.h"
+#include "Entity.h"
+#include "MinorEntity.h"
 
 namespace Engine
 {
@@ -16,8 +16,8 @@ namespace Engine
 	public:
 		SDL_Event* event;
 		SDL_Window* window;
-		std::vector<interfaceDrawUpdate*> objArrayDrawUpdate;
-		std::vector<interfaceDraw*> objArrayDraw;
+		std::vector<Entity*> objArrayDrawUpdate;
+		std::vector<MinorEntity*> objArrayDraw;
 		SDL_Renderer* renderer;
 		Keyboard* keyboard;
 		std::vector<Colisor*> c_Colisors;
@@ -33,8 +33,8 @@ namespace Engine
 		void update();
 		void render();
 		void clean();
-		void PushIntoArrayDrawUpdate(interfaceDrawUpdate* obj);
-		void PushIntoArrayDraw(interfaceDraw* obj);
+		void PushIntoArrayDrawUpdate(Entity* obj);
+		void PushIntoArrayDraw(MinorEntity* obj);
 		void PushColisor(Colisor* colisor);
 		void initLoop();
 		void stopLoop();

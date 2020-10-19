@@ -1,22 +1,13 @@
 #include "LessEntity.h"
 
-LessEntity::LessEntity(){}
-
-LessEntity::LessEntity(SDL_Renderer* renderer,const char* pathImage)
-	: renderer(renderer)
+LessEntity::LessEntity(Engine::Math::Vec2f pos ,SDL_Renderer* renderer,const char* pathImage)
+	: MinorEntity(pos,renderer,pathImage)
 {
-
-	sprite = new Engine::Sprite(renderer, pathImage);
-
-	sprite->box.h = 64;
-	sprite->box.w = 64;
-	sprite->box.x = 0;
-	sprite->box.y = GLOBAL_SCREEN_H - 64;
-
 }
 
 LessEntity::~LessEntity()
 {
+	//delete sprite;
 }
 
 SDL_Rect& LessEntity::boxInfo()

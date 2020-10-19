@@ -20,7 +20,7 @@ namespace Engine
 				std::cout << "Window created!" << std::endl;
 			}
 
-			renderer = SDL_CreateRenderer(window, -1, 0);
+			renderer = SDL_CreateRenderer(window, -1, SDL_RENDERER_ACCELERATED && SDL_RENDERER_PRESENTVSYNC);
 			if (renderer) {
 				SDL_SetRenderDrawColor(renderer, 255, 255, 255, 255);
 				std::cout << "renderer created!" << std::endl;
@@ -69,12 +69,12 @@ namespace Engine
 		std::cout << "Game cleaned" << std::endl;
 	}
 
-	void Game::PushIntoArrayDrawUpdate(interfaceDrawUpdate* obj)
+	void Game::PushIntoArrayDrawUpdate(Entity* obj)
 	{
 		objArrayDrawUpdate.push_back(obj);
 	}
 
-	void Game::PushIntoArrayDraw(interfaceDraw* obj)
+	void Game::PushIntoArrayDraw(MinorEntity* obj)
 	{
 		objArrayDraw.push_back(obj);
 	}
@@ -86,10 +86,10 @@ namespace Engine
 
 	void Game::initLoop()
 	{
-		const short FPS = 60;
+		const short FPS = 30;
 		const int frameDelay = 1000 / FPS;
 
-		Uint32 frameStart = NULL;
+		Uint32 frameStart = 30;
 		int frameTime = NULL;
 		while (this->isRunning) {
 

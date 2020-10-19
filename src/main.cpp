@@ -1,6 +1,5 @@
 #include <iostream>
 #include <random>
-#include <memory>
 #include "Engine/GlobalDefs.h"
 #include "Engine/Game.h"
 #include "Engine/Colisor.h"
@@ -33,7 +32,7 @@ int main(int argc, char* argv[])
     Game* game = new Game();
     //Bind a keyboard to the game instance
     game->bindKeyboard(keyboard);
-    
+
     //create a colisor instance
     Colisor* colisionPlayerGround = new Colisor();
     //Set the colisor mode to First to all mode
@@ -43,12 +42,12 @@ int main(int argc, char* argv[])
     game->init("Game", SDL_WINDOWPOS_CENTERED, SDL_WINDOWPOS_CENTERED, GLOBAL_SCREEN_W, GLOBAL_SCREEN_H, false);
 
     //Create a player instance
-    Player* player = new Player(game->renderer,"assets/player.png");
-    player->bindTypeColision(TypeColision::PLAYER);
+    Player* player = new Player({300,300}, game->renderer, "assets/player.png");
+    player->bindColisionType(TypeColision::PLAYER);
     //Bind a colision to the player
     //The player need to be the first 
     colisionPlayerGround->pushNewItem(player);
-    
+
     //Bind Keyboard to the player
     player->bindKeyboard(keyboard);
     //Set Player force jump
@@ -59,21 +58,20 @@ int main(int argc, char* argv[])
 
     //Create some grounds
     const unsigned short lGround = 15;
-    LessEntity* ground[lGround];
+    LessEntity* ground = new LessEntity[lGround];
     int positionX = 0;
     //define some grounds
     for (int i = 0; i < lGround; i++) {
 
-        ground[i] = new LessEntity(game->renderer,"assets/ground.png");
-        ground[i]->sprite->box.x = positionX;
+        ground[i] = LessEntity({ (float)positionX, (float)GLOBAL_SCREEN_H - 64 }, game->renderer, "assets/ground.png");
         //ground[i].sprite->box.y -= std::rand() % 10;
-        game->PushIntoArrayDraw(ground[i]);
-        colisionPlayerGround->pushNewItem(ground[i]);
-        ground[i]->bindTypeColision(TypeColision::GROUND);
-        positionX += ground[i]->boxInfo().w;
+        game->PushIntoArrayDraw(&ground[i]);
+        colisionPlayerGround->pushNewItem(&ground[i]);
+        ground[i].bindTypeColision(TypeColision::GROUND);
+        positionX += ground[i].boxInfo().w;
 
     }
-    
+
     //Colision for walls
     Colisor* colisionPlayerWall = new Colisor();
     colisionPlayerWall->setModeToColide(COLISOR_FIRST_TO_ALL_MODE_A);
@@ -82,17 +80,16 @@ int main(int argc, char* argv[])
 
     //Create some walls
     const unsigned short lWall = 1;
-    LessEntity* wall[lWall];
+    LessEntity* wall = new LessEntity[lWall];
     positionX = 0;
     for (int i = 0; i < lWall; i++) {
 
-        wall[i] = new LessEntity(game->renderer, "assets/wall.png");
-        wall[i]->sprite->box.x = GLOBAL_SCREEN_W / 2; //- wall[i].objBox.w;
-        wall[i]->sprite->box.y = GLOBAL_SCREEN_H / 2;  //positionX;
-        game->PushIntoArrayDraw(wall[i]);
-        colisionPlayerWall->pushNewItem(wall[i]);
-        wall[i]->bindTypeColision(TypeColision::WALL);
-        positionX += wall[i]->sprite->box.h;
+        wall[i] = LessEntity({100,100}, game->renderer, "assets/wall.png");
+        wall[i].setPos({ GLOBAL_SCREEN_W / 2,GLOBAL_SCREEN_H / 2 });
+        game->PushIntoArrayDraw(&wall[i]);
+        colisionPlayerWall->pushNewItem(&wall[i]);
+        wall[i].bindTypeColision(TypeColision::WALL);
+        positionX += wall[i].getSprite()->box.h;
     }
 
     //Push the player into the game loop
@@ -105,8 +102,8 @@ int main(int argc, char* argv[])
 
     //delete everything on the heap here
     delete keyboard;
-    delete wall;
-    delete ground;
+    delete[] wall;
+    delete[] ground;
     delete player;
     delete game;
     delete colisionPlayerGround;
