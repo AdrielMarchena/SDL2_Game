@@ -111,6 +111,7 @@ namespace Engine
 		int frameTime = NULL;
 		while (this->isRunning) {
 
+			frameStart = SDL_GetTicks();
 			this->handleEvents();
 			this->update();
 			this->render();
