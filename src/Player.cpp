@@ -3,7 +3,7 @@
 Player::Player(Engine::Math::Vec2f pos,SDL_Renderer* renderer,const char* path)
 	: Entity(pos,renderer,path), forceJump(40)
 {
-	dX = 10;
+	dX = 15;
 }
 
 Player::~Player()
@@ -39,8 +39,11 @@ void Player::colided(Engine::InterfaceToColide* cause)
 		side = Engine::Colisor::calcRecColision(&sprite->box, &cBox);
 		//Bottom
 		if (side == Engine::SideColided::BOTTOM)
+		{
+			dY = 0;
 			pos.y = cBox.y + cBox.h;
-
+		}
+			
 		//Left
 		if (side == Engine::SideColided::LEFT)
 			pos.x = cBox.x - sprite->box.h;

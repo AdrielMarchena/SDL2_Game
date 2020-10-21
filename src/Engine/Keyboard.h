@@ -19,7 +19,8 @@ namespace Engine
 		~Keyboard();
 
 		enum ky {
-			ARROW_RIGHT = 1,
+			INVALID,
+			ARROW_RIGHT,
 			ARROW_LEFT,
 			ARROW_UP,
 			ARROW_DOWN,

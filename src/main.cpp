@@ -38,7 +38,7 @@ int main(int argc, char* argv[])
     colisionPlayerGround->setModeToColide(COLISOR_FIRST_TO_ALL_MODE_A);
 
     //Create a player instance
-    Player* player = new Player({300,300}, game->getRenderer(), "assets/player.png");
+    Player* player = new Player({500,64}, game->getRenderer(), "assets/player.png");
     player->bindColisionType(TypeColision::PLAYER);
     //Bind a colision to the player
     //The player need to be the first 
@@ -90,6 +90,11 @@ int main(int argc, char* argv[])
 
     game->PushColisor(colisionPlayerGround);
     game->PushColisor(colisionPlayerWall);
+
+    std::cout << "\nControles: " << std::endl;
+    std::cout << "Setas pra esquerda e direita " << std::endl;
+    std::cout << "Seta pra cima pula " << std::endl;
+    std::cout << " '+' e '-' do teclado numerico alteram força do pulo" << std::endl;
     //Init game loop
     game->initLoop();
 
