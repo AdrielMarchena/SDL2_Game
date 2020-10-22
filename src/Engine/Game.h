@@ -45,6 +45,9 @@ namespace Engine
 		SDL_Renderer* getRenderer();
 		Keyboard* getKeyboard();
 		GlobalConf* getGlobalConf();
+
+	private:
+		inline void globalKeys();
 	};
 }
 

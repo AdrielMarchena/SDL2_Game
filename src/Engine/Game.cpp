@@ -34,6 +34,7 @@ namespace Engine
 				std::cout << "renderer created!" << std::endl;
 			}
 			isRunning = true;
+			
 		}
 		else {
 			isRunning = false;
@@ -43,16 +44,9 @@ namespace Engine
 	void Game::handleEvents()
 	{
 		while (SDL_PollEvent(&keyboard->events)) {
-			if (keyboard->events.type == SDL_QUIT || keyboard->events.type == SDL_SCANCODE_ESCAPE) 
-			{
-				this->stopLoop();
-			}
-			if (keyboard->events.type == SDL_SCANCODE_F11)
-			{
-				fullscreen(!GLOBAL_CONF.fScreen);
-			}
 			keyboard->handleInputs();
 		}
+		globalKeys();
 	}
 
 	void Game::update() 
@@ -140,15 +134,13 @@ namespace Engine
 		if (opc)
 		{
 			SDL_SetWindowFullscreen(window, SDL_WINDOW_FULLSCREEN);
-			GLOBAL_CONF.fScreen = true;
 		}
-			
 		else
 		{
 			SDL_SetWindowFullscreen(window, 0);
-			GLOBAL_CONF.fScreen = false;
 		}
-			
+
+		GLOBAL_CONF.fScreen = !GLOBAL_CONF.fScreen;
 	}
 
 	SDL_Window* Game::getWindow()
@@ -169,6 +161,19 @@ namespace Engine
 	GlobalConf* Game::getGlobalConf()
 	{
 		return &GLOBAL_CONF;
+	}
+
+	inline void Game::globalKeys()
+	{
+		int key = keyboard->events.key.keysym.sym;
+		if (keyboard->events.type == SDL_QUIT || key == SDLK_ESCAPE)
+		{
+			this->stopLoop();
+		}
+		keyboard->clicked(keyboard->F11_KEY, [&]() 
+		{
+			fullscreen(!GLOBAL_CONF.fScreen);
+		});
 	}
 
 }
