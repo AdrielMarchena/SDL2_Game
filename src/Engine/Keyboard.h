@@ -9,11 +9,12 @@ namespace Engine
 	class Keyboard {
 	public:
 		SDL_Event events;
-		std::vector<bool> pressedKeys;
-		std::vector<bool> clickedKeys;
+		
 
 	private:
 		std::vector<std::function<void()>> clickedFunction;
+		std::vector<bool> pressedKeys;
+		std::vector<bool> clickedKeys;
 	public:
 		Keyboard();
 		~Keyboard();
@@ -26,7 +27,9 @@ namespace Engine
 			ARROW_DOWN,
 			SPACEBAR,
 			PLUS_KEY,
-			MINUS_KEY
+			MINUS_KEY,
+			ESC_KEY,
+			F11_KEY
 		};
 
 		void handleInputs();

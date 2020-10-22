@@ -5,7 +5,7 @@ namespace Engine
 	Keyboard::Keyboard() {
 		//Init the arrays with false values
 		//Zero is for non supported keys
-		const unsigned short qtdKeys = 8;
+		const unsigned short qtdKeys = 10;
 		pressedKeys.reserve(qtdKeys); pressedKeys.assign(qtdKeys, false);
 		clickedKeys.reserve(qtdKeys); clickedKeys.assign(qtdKeys, false);
 		clickedFunction.reserve(qtdKeys); clickedFunction.assign(qtdKeys, []()
@@ -67,6 +67,12 @@ namespace Engine
 			break;
 		case SDLK_KP_MINUS:
 			return (int)MINUS_KEY;
+			break;
+		case SDLK_ESCAPE:
+			return (int)ESC_KEY;
+			break;
+		case SDLK_F11:
+			return (int)F11_KEY;
 			break;
 		default:
 			return 0;
