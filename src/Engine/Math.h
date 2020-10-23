@@ -91,9 +91,9 @@ namespace Engine
 			//Override != Identical
 			bool operator!=(const Vec2f& b)
 			{
-				if (this->x == b.x || this->y == b.y)
-					return false;
-				return true;
+				if (this->x != b.x || this->y != b.y)
+					return true;
+				return false;
 			}
 		};
 	}
