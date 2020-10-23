@@ -13,6 +13,7 @@ public:
 	int forceJump;
 	int terminalVelocity = 20;
 	bool isJumping = false;
+	float dT;
 
 public:
 	

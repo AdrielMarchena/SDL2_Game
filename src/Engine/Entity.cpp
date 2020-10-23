@@ -3,9 +3,8 @@
 namespace Engine
 {
 	Entity::Entity(Math::Vec2f pos, SDL_Renderer* renderer, const char* path)
-		: MinorEntity(pos,renderer,path), keyboard(NULL), dX(1.0f), dY(0.0f)
+		: MinorEntity(pos,renderer,path), keyboard(NULL), velocity( {2.0f,2.0f} )
 	{
-		
 	}
 
 	Entity::~Entity()

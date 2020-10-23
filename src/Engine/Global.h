@@ -1,5 +1,5 @@
 #pragma once
-
+#include "Math.h"
 namespace Engine
 {
 	struct WindowSize
@@ -16,7 +16,11 @@ namespace Engine
 	struct GlobalConf
 	{
 		WindowSize windowSize;
-		const float gravity = 1.6f;
+		Math::Vec2f gravity;
 		bool fScreen = false;
+
+		GlobalConf()
+			:gravity({0.0f, 9.8f})
+		{}
 	};
 }

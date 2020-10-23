@@ -10,7 +10,7 @@ namespace Engine
 {
 	class Entity : public MinorEntity, public InterfaceToColide {
 	protected:
-		float dX, dY;
+		Math::Vec2f velocity;
 		Keyboard* keyboard;
 		
 	public:
