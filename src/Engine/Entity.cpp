@@ -35,14 +35,8 @@ namespace Engine
 		this->type = type;
 	}
 	
-	float Entity::getDX()
+	Math::Vec2f Entity::getVelocity()
 	{
-		return dX;
-	}
-	
-	float Entity::getDY()
-	{
-		return dY;
-	}
-	
+		return velocity;
+	}	
 }

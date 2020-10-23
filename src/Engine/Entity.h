@@ -25,7 +25,6 @@ namespace Engine
 		void colided(InterfaceToColide* cause);
 		void bindColisionType(TypeColision type);
 
-		float getDX();
-		float getDY();
+		Math::Vec2f getVelocity();
 	};
 }
